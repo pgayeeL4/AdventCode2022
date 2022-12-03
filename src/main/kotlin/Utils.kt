@@ -1,3 +1,14 @@
+import java.io.File
+
+//region General
+fun makeArrayOfStringsFromFileLines(file: File): List<String> {
+    val lines = mutableListOf<String>()
+    file.inputStream().bufferedReader().forEachLine {
+        lines.add(it)
+    }
+    return lines
+}
+//endregion
 
 //region Day 02
 fun codeToRPSValue(codedValue: String): RPS {
@@ -86,4 +97,29 @@ enum class RPSResult(val resultPointValue: Int) {
     Draw(3),
     Win(6);
 }
+//endregion
+
+//region Day 03
+fun String.splitStrings(): Pair<CharSequence, CharSequence> {
+    val firstHalf = this.subSequence(0, this.length/2)
+    val secondHalf = this.subSequence(this.length/2, this.length)
+    return Pair(firstHalf, secondHalf)
+}
+
+fun Char.asciiSequenceNumber(): Int {
+    //return 1-26 for a-z, 27-52 for A-Z
+    //this is only for alphabetical letters
+
+    //check if uppercase
+    val isUpper = this.isUpperCase()
+
+    //get value as if it's lowercase
+    val sequenceNum = this.lowercaseChar().code - 'a'.code + 1
+    return if(isUpper) {
+        sequenceNum + 26
+    } else {
+        sequenceNum
+    }
+}
+
 //endregion
