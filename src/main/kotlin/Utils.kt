@@ -121,5 +121,23 @@ fun Char.asciiSequenceNumber(): Int {
         sequenceNum
     }
 }
+//endregion
 
+//region Day 04
+fun String.getElfRanges(): Pair<IntRange, IntRange> {
+    //format is x-x,x-x
+    val ranges = this.split(',')
+    val range1 = ranges[0].split('-')
+    val range2 = ranges[1].split('-')
+
+    return Pair(range1[0].toInt()..range1[1].toInt(), range2[0].toInt()..range2[1].toInt())
+}
+
+fun IntRange.contains(rangeOfInts: IntRange): Boolean {
+    // range a-b, c-d
+    // a <= c, b >= d
+
+    return (this.first <= rangeOfInts.first && this.last >= rangeOfInts.last)
+
+}
 //endregion
