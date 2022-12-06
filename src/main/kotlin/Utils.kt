@@ -141,3 +141,30 @@ fun IntRange.contains(rangeOfInts: IntRange): Boolean {
 
 }
 //endregion
+
+//region Day05
+typealias FreightStacks = MutableList<ArrayDeque<Char>>
+typealias CraneMove = Triple<Int, Int, Int> //first is how many to move, second is from where, third is to where
+fun String.parseCraneMove(): CraneMove {
+    //format is "move x from y to z"
+    val nums = this.split("[a-zA-Z]+".toRegex())
+    return CraneMove(nums[1].trim().toInt(), nums[2].trim().toInt(), nums[3].trim().toInt())
+}
+
+fun FreightStacks.moveFreight(craneMovements: CraneMove) {
+    for(i in 1..craneMovements.first) {
+        val removedBox = this[craneMovements.second-1].removeFirst()
+        this[craneMovements.third-1].addFirst(removedBox)
+    }
+}
+
+fun FreightStacks.moveFreightV2(craneMovements: CraneMove) {
+    val removedBoxes = this[craneMovements.second-1].take(craneMovements.first)
+    for(i in 1..craneMovements.first) {
+        this[craneMovements.second-1].removeFirst()
+    }
+    removedBoxes.asReversed().forEach {
+        this[craneMovements.third-1].addFirst(it)
+    }
+}
+//endregion
