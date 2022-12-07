@@ -168,3 +168,19 @@ fun FreightStacks.moveFreightV2(craneMovements: CraneMove) {
     }
 }
 //endregion
+
+//region Day06
+fun String.parseElfMarkers(markerLength: Int): Int {
+    var indexMarker = 0
+    val setOfMarkers = this.windowed(markerLength, 1, false) { it.toSet() }.withIndex()
+    run foundMarker@{
+        setOfMarkers.forEach {
+            if(it.value.size == markerLength) {
+                indexMarker = it.index
+                return@foundMarker
+            }
+        }
+    }
+    return indexMarker+markerLength
+}
+//endregion
