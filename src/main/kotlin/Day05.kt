@@ -12,7 +12,7 @@ fun main() {
     val stack8 = "WHQSJN".toCharArray()
     val stack9 = "VLSFQCR".toCharArray()
 
-    val freightStacks: FreightStacks = mutableListOf(
+    fun freightStacks() = mutableListOf(
         ArrayDeque(stack1.toMutableList()),
         ArrayDeque(stack2.toMutableList()),
         ArrayDeque(stack3.toMutableList()),
@@ -24,11 +24,9 @@ fun main() {
         ArrayDeque(stack9.toMutableList())
     )
 
-    fun getInitialStacks() = freightStacks
-
     fun part01(): FreightStacks {
         val inputStream = File("./src/main/resources/Day05Input.txt").inputStream()
-        val stacks = getInitialStacks()
+        val stacks = freightStacks()
 
         inputStream.bufferedReader().forEachLine { instruction ->
             val craneMovement = instruction.parseCraneMove()
@@ -41,7 +39,7 @@ fun main() {
 
     fun part02(): FreightStacks {
         val inputStream = File("./src/main/resources/Day05Input.txt").inputStream()
-        val stacks = getInitialStacks()
+        val stacks = freightStacks()
 
         inputStream.bufferedReader().forEachLine { instruction ->
             val craneMovement = instruction.parseCraneMove()
